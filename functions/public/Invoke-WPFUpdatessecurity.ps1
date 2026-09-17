@@ -67,13 +67,12 @@ function Invoke-WPFUpdatessecurity {
         Remove-ItemProperty -Path $legacySettingsPath -Name $legacyValue -ErrorAction SilentlyContinue
     }
 
-    Write-Host "Preventing automatic restarts while users are signed in..."
-    Write-WinUtilLog -Component "Updates" -Message "Configuring scheduled automatic updates without restarting while users are signed in."
+    Write-Host "Configuring automatic updates to download and notify before installation..."
+    Write-WinUtilLog -Component "Updates" -Message "Configuring automatic updates to download and notify before installation, in order to avoid unexpected restarts."
 
     New-Item -Path $automaticUpdatePolicyPath -Force
-    # NoAutoRebootWithLoggedOnUsers only applies when automatic updates use option 4.
-    Set-ItemProperty -Path $automaticUpdatePolicyPath -Name "AUOptions" -Type DWord -Value 4
-    Set-ItemProperty -Path $automaticUpdatePolicyPath -Name "NoAutoRebootWithLoggedOnUsers" -Type DWord -Value 1
+    # Set AUOptions to 3 (automatically download and notify for installation) to avoid forced restarts on Windows 11 24H2+
+    Set-ItemProperty -Path $automaticUpdatePolicyPath -Name "AUOptions" -Type DWord -Value 3
     Set-ItemProperty -Path $automaticUpdatePolicyPath -Name "AUPowerManagement" -Type DWord -Value 0
 
     Write-WinUtilLog -Component "Updates" -Message "Recommended Windows Update settings workflow completed."
