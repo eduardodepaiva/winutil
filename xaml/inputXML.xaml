@@ -1049,14 +1049,16 @@
         </Border>
         <Grid Grid.Row="1" Background="{DynamicResource MainBackgroundColor}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/> <!-- Navigation buttons -->
-                <ColumnDefinition Width="*"/> <!-- Search bar and buttons -->
+                <ColumnDefinition Width="Auto" /> <!-- WinUtil icon --> 
+                <ColumnDefinition Width="*" />    <!-- Navigation buttons -->
+                <ColumnDefinition Width="Auto" /> <!-- Search bar and buttons -->
             </Grid.ColumnDefinitions>
 
+            <StackPanel Name="NavLogoPanel" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" Background="{DynamicResource MainBackgroundColor}" SnapsToDevicePixels="True" Margin="10,0,20,0">
+            </StackPanel>
+
             <!-- Navigation Buttons Panel -->
-            <StackPanel Name="NavDockPanel" Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center" Margin="5,5,10,5">
-                <StackPanel Name="NavLogoPanel" Orientation="Horizontal" HorizontalAlignment="Left" Background="{DynamicResource MainBackgroundColor}" SnapsToDevicePixels="True" Margin="10,0,20,0">
-                </StackPanel>
+            <WrapPanel Name="NavDockPanel" Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center" Margin="5,5,10,5">
                 <ToggleButton Style="{StaticResource TabToggleButton}" Margin="0,0,5,0" Height="{DynamicResource TabButtonHeight}" Width="{DynamicResource TabButtonWidth}"
                     Background="{DynamicResource ButtonInstallBackgroundColor}" Foreground="white" FontWeight="Bold" Name="WPFTab1BT">
                     <ToggleButton.Content>
@@ -1097,10 +1099,10 @@
                         </TextBlock>
                     </ToggleButton.Content>
                 </ToggleButton>
-            </StackPanel>
+            </WrapPanel>
 
             <!-- Search Bar and Action Buttons -->
-            <Grid Name="GridBesideNavDockPanel" Grid.Column="1" Background="{DynamicResource MainBackgroundColor}" ShowGridLines="False" Height="Auto">
+            <Grid Name="GridBesideNavDockPanel" Grid.Column="2" Background="{DynamicResource MainBackgroundColor}" ShowGridLines="False" Height="Auto">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/> <!-- Search bar area - priority space -->
                     <ColumnDefinition Width="Auto"/><!-- Buttons area -->
